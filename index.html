@@ -28,7 +28,7 @@
 
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
-            document.getElementById('apiData').innerText = apiData;
+            document.getElementById('apiData').innerText = apiData.innerText = Json.stringify(apiData, null, 2);
         }
     </script>
 
