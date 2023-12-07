@@ -10,23 +10,28 @@
     <h1>Enter API URL:</h1>
 
     <input type="text" id="apiUrlInput" placeholder="Enter API URL">
-    <button onclick="sendDataToFlutter()">Send to Flutter</button>
+    <button onclick="fetchApiData()">Send to Flutter</button>
 
     <h2>API Data:</h2>
-    <pre id="apiData"></pre>
+    <pre id="apiDataDisplay"></pre>
 
     <script>
-        function sendDataToFlutter() {
+        function fetchApiData() {
             var apiUrl = document.getElementById('apiUrlInput').value;
             if (window.flutter) {
-                window.flutter.postMessage('fetchData');
+                window.flutter.postMessage(apiUrl);
             } else {
                 console.error('Flutter channel not available');
             }
         }
 
-        function displayData(apiData) {
-            document.getElementById('apiData').innerText = JSON.stringify(apiData, null, 2);
+        function displayApiData(apiData) {
+            var apiDataDisplay = document.getElementById('apiDataDisplay');
+            if (apiDataDisplay) {
+                apiDataDisplay.textContent = apiData;
+            } else {
+                console.error('API data display element not found');
+            }
         }
     </script>
 
