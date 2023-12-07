@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flutter WebView Communication</title>
+    <title>Flutter API WebView Example</title>
 </head>
 <body>
 
-    <h1>Enter API URL:</h1>
+    <h1>API WebView Example</h1>
 
-    <input type="text" id="apiUrlInput" placeholder="Enter API URL">
-    <button onclick="fetchApiData()">Send to Flutter</button>
+    <label for="apiUrl">Enter API URL:</label>
+    <input type="text" id="apiUrl" placeholder="Enter API URL">
+    <button onclick="sendApiUrl()">Send</button>
 
     <h2>API Data:</h2>
-    <pre id="apiDataDisplay"></pre>
+    <pre id="apiData"></pre>
 
     <script>
-        function fetchApiData() {
-            var apiUrl = document.getElementById('apiUrlInput').value;
+        function sendApiUrl() {
+            var apiUrl = document.getElementById('apiUrl').value;
             if (window.flutter) {
                 window.flutter.postMessage(apiUrl);
             } else {
@@ -25,13 +26,9 @@
             }
         }
 
-        function displayApiData(apiData) {
-            var apiDataDisplay = document.getElementById('apiDataDisplay');
-            if (apiDataDisplay) {
-                apiDataDisplay.textContent = apiData;
-            } else {
-                console.error('API data display element not found');
-            }
+        function displayApiData(apiUrl, apiData) {
+            document.getElementById('apiUrl').value = apiUrl;
+            document.getElementById('apiData').innerText = apiData;
         }
     </script>
 
