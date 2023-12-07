@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter WebView Communication</title>
+</head>
+<body>
+
+    <h1>Enter API URL:</h1>
+
+    <input type="text" id="apiUrlInput" placeholder="Enter API URL">
+    <button onclick="sendDataToFlutter()">Send to Flutter</button>
+
+    <h2>API Data:</h2>
+    <pre id="apiData"></pre>
+
+    <script>
+        function sendDataToFlutter() {
+            var apiUrl = document.getElementById('apiUrlInput').value;
+            if (window.flutter) {
+                window.flutter.postMessage('fetchData');
+            } else {
+                console.error('Flutter channel not available');
+            }
+        }
+
+        function displayData(apiData) {
+            document.getElementById('apiData').innerText = JSON.stringify(apiData, null, 2);
+        }
+    </script>
+
+</body>
+</html>
