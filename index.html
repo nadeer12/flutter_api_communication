@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <h1>APi WebView Example</h1>
+    <h1>API Web View Example</h1>
 
     <label for="apiUrl">Enter API URL:</label>
     <input type="text" id="apiUrl" placeholder="Enter API URL">
@@ -28,7 +28,7 @@
 
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
-            document.getElementById('apiData').innerText = apiData.innerText = Json.stringify(apiData, null, 2);
+            document.getElementById('apiData').innerText = JSON.stringify(apiData, null, 2);
         }
     </script>
 
