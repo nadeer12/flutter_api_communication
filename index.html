@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,6 +29,106 @@
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
             document.getElementById('apiData').innerText = JSON.stringify(apiData, null,2);
+        }
+    </script>
+
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter API WebView Example</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        @media only screen and (min-width: 600px) {
+            input, button {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>API WebView Example</h1>
+
+    <label for="apiUrl">Enter API URL:</label>
+    <br>
+    <input type="url" id="apiUrl" placeholder="Enter API URL">
+    <br>
+    <button onclick="sendApiUrl()">Send</button>
+
+    <h2>API Data:</h2>
+    <pre id="apiData"></pre>
+
+    <script>
+        function sendApiUrl() {
+            var apiUrl = document.getElementById('apiUrl').value;
+            if (window.flutter) {
+                window.flutter.postMessage(apiUrl);
+            } else {
+                console.error('Flutter channel not available');
+            }
+        }
+
+        function displayApiData(apiUrl, apiData) {
+            document.getElementById('apiUrl').value = apiUrl;
+            document.getElementById('apiData').innerText = JSON.stringify(apiData, null, 2);
         }
     </script>
 
