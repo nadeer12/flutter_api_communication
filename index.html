@@ -41,7 +41,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,19 +50,40 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
             text-align: center;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1, h2 {
-            color: #333;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         label {
             display: block;
             margin-bottom: 5px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         input {
@@ -71,16 +91,18 @@
             margin-bottom: 10px;
             width: 80%;
             max-width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         button {
             padding: 10px;
-            background-color: #4caf50;
+            background-color: #4c95af;
             color: white;
             border: none;
             cursor: pointer;
             width: 80%;
             max-width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         button:hover {
@@ -88,12 +110,13 @@
         }
 
         pre {
-            background-color: #eee;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 5px;
             white-space: pre-wrap;
             max-width: 100%;
             overflow-x: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         @media only screen and (min-width: 600px) {
@@ -105,16 +128,24 @@
 </head>
 <body>
 
-    <h1>API WebView Example</h1>
+    <video id="video-background" autoplay muted loop>
+        <!-- Add your video source here -->
+        <source src="bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-    <label for="apiUrl">Enter API URL:</label>
-    <br>
-    <input type="url" id="apiUrl" placeholder="Enter API URL">
-    <br>
-    <button onclick="sendApiUrl()">Send</button>
+    <div class="content">
+        <h1>API WebView Example</h1>
 
-    <h2>API Data:</h2>
-    <pre id="apiData"></pre>
+        <label for="apiUrl">Enter API URL:</label>
+        <br>
+        <input type="url" id="apiUrl" placeholder="Enter API URL">
+        <br>
+        <button onclick="sendApiUrl()">Send</button>
+
+        <h2>API Data:</h2>
+        <pre id="apiData"></pre>
+    </div>
 
     <script>
         function sendApiUrl() {
