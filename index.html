@@ -66,16 +66,13 @@
             background-color: #45a049;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
+        pre {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 5px;
+            white-space: pre-wrap;
+            max-width: 100%;
+            overflow-x: auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             color: #000; /* Change text color to black */
         }
@@ -105,7 +102,7 @@
         <button onclick="sendApiUrl()">Send</button>
 
         <h2>API Data:</h2>
-        <ul id="apiDataList"></ul>
+        <pre id="apiData"></pre>
     </div>
 
     <script>
@@ -120,23 +117,19 @@
 
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
-            try {
-                var parsedData = JSON.parse(apiData);
-                displayAsList(parsedData);
-            } catch (error) {
-                document.getElementById('apiDataList').innerHTML = `<li>${apiData}</li>`;
-            }
+            var formattedData = createListView(apiData);
+            document.getElementById('apiData').innerHTML = formattedData;
         }
 
-        function displayAsList(data) {
-            var listContainer = document.getElementById('apiDataList');
-            listContainer.innerHTML = ''; // Clear existing list items
-            var keys = Object.keys(data);
-            keys.forEach(function(key) {
-                var listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>${key}:</strong> ${data[key]}`;
-                listContainer.appendChild(listItem);
-            });
+        function createListView(data) {
+            var listHTML = '<ul>';
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    listHTML += '<li><strong>' + key + ':</strong> ' + data[key] + '</li>';
+                }
+            }
+            listHTML += '</ul>';
+            return listHTML;
         }
     </script>
 
