@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            
+            overflow: hidden;
         }
 
         #video-background {
@@ -25,7 +24,7 @@
 
         .content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             text-align: center;
             color: #fff;
             padding: 20px;
@@ -104,48 +103,6 @@
 
         <h2>API Data:</h2>
         <pre id="apiData"></pre>
-
-    <h2>API Post Data:</h2>
-    <label for="currencySymbol">Currency Symbol:</label>
-    <br>
-    <input type="text" id="currencySymbol" placeholder="Enter Currency Symbol">
-    <br>
-
-    <label for="currencyName">Currency Name:</label>
-    <br>
-    <input type="text" id="currencyName" placeholder="Enter Currency Name">
-    <br>
-
-    <label for="decimalPlaces">Decimal Places:</label>
-    <br>
-    <input type="text" id="decimalPlaces" placeholder="Enter Decimal Places">
-    <br>
-
-    <label for="decimalSymbol">Decimal Symbol:</label>
-    <br>
-    <input type="text" id="decimalSymbol" placeholder="Enter Decimal Symbol">
-    <br>
-
-    <label for="priority">Priority:</label>
-    <br>
-    <input type="text" id="priority" placeholder="Enter Priority">
-    <br>
-
-    <label for="fromDate">From Date:</label>
-    <br>
-    <input type="text" id="fromDate" placeholder="Enter From Date">
-    <br>
-
-    <label for="exchangeRate">Exchange Rate:</label>
-    <br>
-    <input type="text" id="exchangeRate" placeholder="Enter Exchange Rate">
-    <br>
-
-    <button onclick="postCurrencyData()">Post Data</button>
-    <pre id="postDataResult"></pre>
-
-
-        
     </div>
 
     <script>
@@ -174,25 +131,6 @@
             listHTML += '</ul>';
             return listHTML;
         }
-
-function postCurrencyData() {
-    var apiUrl = document.getElementById('apiUrl').value;
-    var currencyData = {
-        CurrencySymbol: document.getElementById('currencySymbol').value,
-        CurrencyName: document.getElementById('currencyName').value,
-        DecimalPlaces: parseInt(document.getElementById('decimalPlaces').value),
-        DecimalSymbol: document.getElementById('decimalSymbol').value,
-        Priority: parseInt(document.getElementById('priority').value),
-        FromDate: document.getElementById('fromDate').value,
-        ExchangeRate: parseFloat(document.getElementById('exchangeRate').value),
-    };
-
-    if (window.flutter) {
-        window.flutter.postMessage({ type: 'postCurrencyData', apiUrl: apiUrl, data: currencyData });
-    } else {
-        console.error('Flutter channel not available');
-    }
-}
     </script>
 
 </body>
