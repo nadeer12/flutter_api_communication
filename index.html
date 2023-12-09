@@ -115,7 +115,7 @@
         <button type="button" onclick="fetchData()">Get Data</button>
 
 
-        <h2>API Data1:</h2>
+        <h2>API Data:</h2>
         <pre id="apiData"></pre>
     </div>
 
@@ -145,7 +145,11 @@
         function fechData() {
             var apiUrl = document.getElementById('apiUrl').value;
             if (window.flutter) {
-                window.flutter.postMessage(apiUrl);
+                var data = {
+                    apiUrl: apiUrl,
+                    method: 'GET',
+                };
+                 window.flutter.postMessage(JSON.stringify(data));
             } else {
                 console.error('Flutter channel not available');
             }
