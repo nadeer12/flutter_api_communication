@@ -142,14 +142,19 @@
             }
         }
 
-        function fechData() {
-            var apiUrl = document.getElementById('apiUrl').value;
-             if (window.flutter) {
-                window.flutter.postMessage(apiUrl);
-            } else {
-                console.error('Flutter channel not available');
-            }
-        }        
+    function fechData() {
+        var apiUrl = document.getElementById('apiUrl').value;
+
+        if (window.flutter) {
+            var data = {
+                apiUrl: apiUrl,
+                method: 'GET',
+            };
+            window.flutter.postMessage(JSON.stringify(data));
+        } else {
+            console.error('Flutter channel not available');
+        }
+    }      
 
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
