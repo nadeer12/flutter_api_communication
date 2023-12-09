@@ -93,6 +93,11 @@
     <div class="content">
         <h1>API WebView Example</h1>
 
+        <label for="apiUrl">Enter API URL:</label>
+        <br>
+        <input type="url" id="apiUrl" placeholder="Enter API URL">
+        <br>
+
         <form id="postDataForm">
             <label for="currencySymbol">Currency Symbol:</label>
             <input type="text" id="currencySymbol" name="currencySymbol">
@@ -101,19 +106,10 @@
             <input type="text" id="currencyName" name="currencyName">
 
             <label for="decimalPlaces">Decimal Places:</label>
-            <input type="text" id="decimalPlaces" name="decimalPlaces">
+            <input type="number" id="decimalPlaces" name="decimalPlaces">
 
             <label for="decimalSymbol">Decimal Symbol:</label>
             <input type="text" id="decimalSymbol" name="decimalSymbol">
-
-            <label for="priority">Priority:</label>
-            <input type="text" id="priority" name="priority">
-
-            <label for="fromDate">From Date:</label>
-            <input type="text" id="fromDate" name="fromDate">
-
-            <label for="exchangeRate">Exchange Rate:</label>
-            <input type="text" id="exchangeRate" name="exchangeRate">
 
             <button type="button" onclick="sendPostData()">Submit</button>
         </form>
@@ -123,20 +119,10 @@
     </div>
 
     <script>
-        function sendPostData() {
+        function sendApiUrl() {
             var apiUrl = document.getElementById('apiUrl').value;
-            var formData = {
-                CurrencySymbol: document.getElementById('currencySymbol').value,
-                CurrencyName: document.getElementById('currencyName').value,
-                DecimalPlaces: document.getElementById('decimalPlaces').value,
-                DecimalSymbol: document.getElementById('decimalSymbol').value,
-                Priority: document.getElementById('priority').value,
-                FromDate: document.getElementById('fromDate').value,
-                ExchangeRate: document.getElementById('exchangeRate').value,
-            };
-
             if (window.flutter) {
-                window.flutter.postMessage({ apiUrl, method: 'POST', data: formData });
+                window.flutter.postMessage(apiUrl);
             } else {
                 console.error('Flutter channel not available');
             }
@@ -157,6 +143,22 @@
             }
             listHTML += '</ul>';
             return listHTML;
+        }
+
+        function sendPostData() {
+            var apiUrl = document.getElementById('apiUrl').value;
+            var formData = {
+                CurrencySymbol: document.getElementById('currencySymbol').value,
+                CurrencyName: document.getElementById('currencyName').value,
+                DecimalPlaces: parseInt(document.getElementById('decimalPlaces').value),
+                DecimalSymbol: document.getElementById('decimalSymbol').value,
+            };
+
+            if (window.flutter) {
+                window.flutter.postMessage({ apiUrl, method: 'POST', data: formData });
+            } else {
+                console.error('Flutter channel not available');
+            }
         }
     </script>
 
