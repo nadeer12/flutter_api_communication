@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-/*             overflow: hidden; */
+            overflow: hidden;
         }
 
         #video-background {
@@ -24,7 +25,7 @@
 
         .content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             text-align: center;
             color: #fff;
             padding: 20px;
@@ -103,35 +104,6 @@
 
         <h2>API Data:</h2>
         <pre id="apiData"></pre>
-
-
-        <hr>
-
-    <h2>Post Data:</h2>
-    <label for="currencySymbol">Currency Symbol:</label>
-    <input type="text" id="currencySymbol" placeholder="Currency Symbol">
-    <br>
-    <label for="currencyName">Currency Name:</label>
-    <input type="text" id="currencyName" placeholder="Currency Name">
-    <br>
-    <label for="decimalPlaces">Decimal Places:</label>
-    <input type="number" id="decimalPlaces" placeholder="Decimal Places">
-    <br>
-    <label for="decimalSymbol">Decimal Symbol:</label>
-    <input type="text" id="decimalSymbol" placeholder="Decimal Symbol">
-    <br>
-    <label for="priority">Priority:</label>
-    <input type="text" id="priority" placeholder="Priority">
-    <br>
-    <label for="fromDate">From Date:</label>
-    <input type="text" id="fromDate" placeholder="From Date">
-    <br>
-    <label for="exchangeRate">Exchange Rate:</label>
-    <input type="number" id="exchangeRate" placeholder="Exchange Rate">
-    <br>
-    <button onclick="postData()">Post Data</button>
-
-        
     </div>
 
     <script>
@@ -160,28 +132,8 @@
             listHTML += '</ul>';
             return listHTML;
         }
-
-
-
-
-        function postData() {
-            var postData = {
-                "CurrencySymbol": document.getElementById('currencySymbol').value,
-                "CurrencyName": document.getElementById('currencyName').value,
-                "DecimalPlaces": parseInt(document.getElementById('decimalPlaces').value),
-                "DecimalSymbol": document.getElementById('decimalSymbol').value,
-                "Priority": document.getElementById('priority').value,
-                "FromDate": document.getElementById('fromDate').value,
-                "ExchangeRate": parseFloat(document.getElementById('exchangeRate').value)
-            };
-
-            if (window.flutter) {
-                window.flutter.postMessage(postData);
-            } else {
-                console.error('Flutter channel not available');
-            }
-        }
     </script>
 
 </body>
 </html>
+
