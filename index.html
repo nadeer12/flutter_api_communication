@@ -176,6 +176,7 @@
         }
 
         function postCurrencyData() {
+            var apiUrl = document.getElementById('apiUrl').value;
             var currencyData = {
                 CurrencySymbol: document.getElementById('currencySymbol').value,
                 CurrencyName: document.getElementById('currencyName').value,
@@ -187,7 +188,7 @@
             };
 
             if (window.flutter) {
-                window.flutter.postMessage({ type: 'postCurrencyData', data: currencyData });
+                window.flutter.postMessage({ type: 'postCurrencyData', apiUrl: apiUrl, data: currencyData });
             } else {
                 console.error('Flutter channel not available');
             }
