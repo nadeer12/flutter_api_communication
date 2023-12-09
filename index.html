@@ -112,7 +112,7 @@
 
         <button type="button" onclick="sendApiData()">POST data</button>
         
-        <button type="button" onclick="fechData()">Get Data</button>
+        <button type="button" onclick="fetchData()">Get Data</button>
 
 
         <h2>API Data_:</h2>
@@ -142,7 +142,7 @@
             }
         }
 
-    function fechData() {
+    function fetchData() {
         var apiUrl = document.getElementById('apiUrl').value;
             if (window.flutter) {
                 window.flutter.postMessage(apiUrl);
