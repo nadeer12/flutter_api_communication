@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            
+            overflow: hidden;
         }
 
         #video-background {
@@ -24,7 +24,7 @@
 
         .content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             text-align: center;
             color: #fff;
             padding: 20px;
@@ -110,18 +110,13 @@
         <label for="decimalSymbol">Decimal Symbol:</label>
         <input type="text" id="decimalSymbol" name="decimalSymbol">
 
-        <button type="button" onclick="sendApiData()">POST data</button>
-        <br>
-        <button type="button" onclick="fetchApiData()">GET data</button>
-        <br>
+        <button type="button" onclick="sendApiData()">Submit</button>
 
         <h2>API Data:</h2>
         <pre id="apiData"></pre>
     </div>
 
     <script>
-
-        
         function sendApiData() {
             var apiUrl = document.getElementById('apiUrl').value;
 
@@ -143,22 +138,6 @@
                 console.error('Flutter channel not available');
             }
         }
-
-
-        function fetchApiData() {
-            var apiUrl = document.getElementById('apiUrl').value;
-
-            if (window.flutter) {
-                var data = {
-                    apiUrl: apiUrl,
-                    method: 'GET',
-                };
-                window.flutter.postMessage(JSON.stringify(data));
-            } else {
-                console.error('Flutter channel not available');
-            }
-        }
-
 
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
