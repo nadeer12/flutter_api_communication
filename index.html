@@ -97,6 +97,11 @@
         <br>
         <input type="url" id="apiUrl" placeholder="Enter API URL">
         <br>
+        
+        <button onclick="sendApiUrl()">Send</button>
+
+        <h2>API Data:</h2>
+        <pre id="apiData"></pre>
 
         <label for="currencySymbol">Currency Symbol:</label>
         <input type="text" id="currencySymbol" name="currencySymbol">
@@ -112,11 +117,28 @@
 
         <button type="button" onclick="sendApiData()">Submit</button>
 
-        <h2>API Data:</h2>
-        <pre id="apiData"></pre>
+        
     </div>
 
     <script>
+
+
+        function sendApiUrl() {
+            var apiUrl = document.getElementById('apiUrl').value;
+            if (window.flutter) {
+                window.flutter.postMessage(apiUrl);
+            } else {
+                console.error('Flutter channel not available');
+            }
+        }
+
+        function displayApiData(apiUrl, apiData) {
+            document.getElementById('apiUrl').value = apiUrl;
+            document.getElementById('apiData').innerText = JSON.stringify(apiData, null, 2);
+           
+        }
+
+        
         function sendApiData() {
             var apiUrl = document.getElementById('apiUrl').value;
 
@@ -139,22 +161,6 @@
             }
         }
 
-        function displayApiData(apiUrl, apiData) {
-            document.getElementById('apiUrl').value = apiUrl;
-            var formattedData = createListView(apiData);
-            document.getElementById('apiData').innerHTML = formattedData;
-        }
-
-        function createListView(data) {
-            var listHTML = '<ul>';
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    listHTML += '<li><strong>' + key + ':</strong> ' + data[key] + '</li>';
-                }
-            }
-            listHTML += '</ul>';
-            return listHTML;
-        }
     </script>
 
 </body>
