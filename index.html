@@ -111,15 +111,30 @@
         <input type="text" id="decimalSymbol" name="decimalSymbol">
 
         <button type="button" onclick="sendApiData()">POST data</button>
-        
-        <button type="button" onclick="fetchData()">Get Data</button>
+        <br>
+        <button type="button" onclick="fetchApiData()">GET data</button>
+        <br>
 
-
-        <h2>API Data_:</h2>
+        <h2>API Data:</h2>
         <pre id="apiData"></pre>
     </div>
 
     <script>
+        function fetchApiData() {
+            var apiUrl = document.getElementById('apiUrl').value;
+
+            if (window.flutter) {
+                var data = {
+                    apiUrl: apiUrl,
+                    method: 'GET',
+                };
+                window.flutter.postMessage(JSON.stringify(data));
+            } else {
+                console.error('Flutter channel not available');
+            }
+        }
+
+        
         function sendApiData() {
             var apiUrl = document.getElementById('apiUrl').value;
 
@@ -142,15 +157,6 @@
             }
         }
 
-    function fetchData() {
-        var apiUrl = document.getElementById('apiUrl').value;
-            if (window.flutter) {
-                window.flutter.postMessage(apiUrl);
-            } else {
-                console.error('Flutter channel not available');
-            }
-
-    }      
 
         function displayApiData(apiUrl, apiData) {
             document.getElementById('apiUrl').value = apiUrl;
